@@ -23,6 +23,7 @@ class FadingTextAnimation extends StatefulWidget {
 class FadingTextAnimationState extends State<FadingTextAnimation> {
   bool _isVisible = true;
   bool _mode = true;
+
   void toggleVisibility() {
     setState(() {
       _isVisible = !_isVisible;
@@ -48,7 +49,16 @@ class FadingTextAnimationState extends State<FadingTextAnimation> {
         title: Text('Fading Text Animation'),
         actions: [
           IconButton(onPressed: cycle, icon: Icon(Icons.square)),
-          IconButton(onPressed: colorPick, icon: Icon(Icons.color_lens)),
+          IconButton(
+            onPressed: () {
+              // Navigate to the second screen when the icon button is pressed
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SecondScreen()),
+              );
+            },
+            icon: Icon(Icons.circle),
+          ),
         ],
       ),
       body: SizedBox.expand(
