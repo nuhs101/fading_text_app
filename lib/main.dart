@@ -35,12 +35,21 @@ class FadingTextAnimationState extends State<FadingTextAnimation> {
     });
   }
 
+  void colorPick() {
+    setState(() {
+      
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Fading Text Animation'),
-        actions: [IconButton(onPressed: cycle, icon: Icon(Icons.circle))],
+        actions: [
+          IconButton(onPressed: cycle, icon: Icon(Icons.square)),
+          IconButton(onPressed: colorPick, icon: Icon(Icons.color_lens)),
+        ],
       ),
       body: SizedBox.expand(
         child: AnimatedContainer(
