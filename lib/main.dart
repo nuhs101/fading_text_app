@@ -92,7 +92,7 @@ class _SecondScreenState extends State<SecondScreen>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
-
+  bool _isFrameVisible = false; // Controls the visibility of the frame
   @override
   void initState() {
     super.initState();
@@ -121,9 +121,48 @@ class _SecondScreenState extends State<SecondScreen>
       body: Center(
         child: FadeTransition(
           opacity: _fadeAnimation,
-          child: Text(
-            'This is the second screen with FadeTransition!',
-            style: TextStyle(fontSize: 24),
+          child: Column(
+            children: [
+              // Image with rounded corners and frame
+              AnimatedContainer(
+                duration: Duration(milliseconds: 500),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20), // Rounded corners
+                  border:
+                      _isFrameVisible
+                          ? Border.all(
+                            color: Colors.black,
+                            width: 5,
+                          ) // Frame when visible
+                          : null, // No border when the frame is hidden
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.asset(
+                    'assets/jeff.png',
+                    width: 200,
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              // Switch to toggle the frame visibility
+              SwitchListTile(
+                title: Text('Toggle Frame'),
+                value: _isFrameVisible,
+                onChanged: (bool value) {
+                  setState(() {
+                    _isFrameVisible = value;
+                  });
+                },
+              ),
+              SizedBox(height: 20),
+              Text(
+                'This is the second screen with FadeTransition!',
+                style: TextStyle(fontSize: 24),
+              ),
+            ],
           ),
         ),
       ),
