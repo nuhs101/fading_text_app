@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
+import 'package:color_type_converter/color_type_converter.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,7 +25,9 @@ class FadingTextAnimation extends StatefulWidget {
 class FadingTextAnimationState extends State<FadingTextAnimation> {
   bool _isVisible = true;
   bool _mode = true;
-
+  bool _picker = false;
+  Color textColor = Colors.black;
+  late final _colorNotifier = ValueNotifier(textColor);
   void toggleVisibility() {
     setState(() {
       _isVisible = !_isVisible;
@@ -38,10 +42,10 @@ class FadingTextAnimationState extends State<FadingTextAnimation> {
 
   void colorPick() {
     setState(() {
-      
+      _picker = !_picker;
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +63,7 @@ class FadingTextAnimationState extends State<FadingTextAnimation> {
             },
             icon: Icon(Icons.circle),
           ),
+          IconButton(onPressed: colorPick, icon: Icon(Icons.pentagon)),
         ],
       ),
       body: SizedBox.expand(
@@ -72,8 +77,29 @@ class FadingTextAnimationState extends State<FadingTextAnimation> {
               AnimatedOpacity(
                 opacity: _isVisible ? 1.0 : 0.0,
                 duration: const Duration(seconds: 1),
-                child: Text('Hello, Flutter!', style: TextStyle(fontSize: 24)),
+                child: Text(
+                  'Hello, Flutter!',
+                  style: TextStyle(fontSize: 24, color: textColor),
+                ),
               ),
+              if (_picker)
+                Padding(
+                  padding: EdgeInsets.all(20),
+                  child: ValueListenableBuilder<Color>(
+                    valueListenable: _colorNotifier,
+                    builder: (_, color, __) {
+                      return ColorPicker(
+                        color: color,
+                        onChanged: (value) {
+                          setState(() {
+                            color = value;
+                            textColor = value;
+                          });
+                        },
+                      );
+                    },
+                  ),
+                ),
             ],
           ),
         ),
