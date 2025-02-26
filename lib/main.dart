@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
-import 'package:color_type_converter/color_type_converter.dart';
 
 void main() {
   runApp(MyApp());

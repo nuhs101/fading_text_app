@@ -41,14 +41,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.19.1"
-  color_type_converter:
-    dependency: "direct main"
-    description:
-      name: color_type_converter
-      sha256: c35d8c565335696d183d6798d98d9ba21e372e550f3c078409bd9c1e8aefde06
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.5"
   cupertino_icons:
     dependency: "direct main"
     description:

@@ -39,7 +39,7 @@ dependencies:
   flutter_hsvcolor_picker: ^1.2.3
 
   # Color converter dependency
-  color_type_converter: ^1.0.5
+  
 
 dev_dependencies:
   flutter_test:
